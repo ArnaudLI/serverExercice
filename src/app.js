@@ -1,6 +1,8 @@
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser')
+const userService = require('./service/user.service')
+
 
 const app = express();
 
@@ -21,19 +23,29 @@ app.options('/*', (req, res) => {
 });
 
 app.post('/login', function(req, res) {
-
+    const userParams = req.body
+    const user = userService.login(userParams.name, userParams.password)
+    if (user != null) {
+        res.status(200).json(user)
+    } else {
+        res.status(401).json({})
+    }
 })
 
 app.post('/user', function(req, res) {
 
 })
 
-app.post('/user', function(req, res) {
+app.get('/user', function(req, res) {
 
+})
+
+app.get('/news', function(req, res) {
+    
 })
 
 app.get('/products', function(req, res) {
-    
+
 })
 
 module.exports = app
