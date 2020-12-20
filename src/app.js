@@ -1,8 +1,10 @@
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser')
-const userService = require('./service/user.service')
 
+const userService = require('./service/user.service')
+const newsService = require('./service/news.service')
+const productService = require('./service/product.service')
 
 const app = express();
 
@@ -33,19 +35,21 @@ app.post('/login', function(req, res) {
 })
 
 app.post('/user', function(req, res) {
-
+    res.status(200).send('')
 })
 
 app.get('/user', function(req, res) {
-
+    res.status(200).send('')
 })
 
 app.get('/news', function(req, res) {
-    
+    const news = newsService.getNews()
+    res.status(200).json(news)
 })
 
 app.get('/products', function(req, res) {
-
+    const products = productService.getProducts()
+    res.status(200).json(products)
 })
 
 module.exports = app
